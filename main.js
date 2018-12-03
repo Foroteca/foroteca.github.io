@@ -1810,10 +1810,10 @@ var AuthService = /** @class */ (function () {
                     MensajeUsuario: "Ningun error"
                 };
                 var usermessage;
-                console.log("Codigo de error:", Err.code);
-                console.log("Mensaje:", Err.mensaje);
+                // console.log("Codigo de error:",Err.code);
+                // console.log("Mensaje:", Err.mensaje);
                 if (Err.code == "auth/email-already-in-use") {
-                    usermessage = 'El correo: "' + newUser.email + '" ya se uso';
+                    usermessage = 'El correo "' + newUser.email + '" ya se uso';
                 }
                 //Estos errores ya los manejo en frontend con los componentes, para eviarlos
                 //esto es solo un plan B en caso de que no llegaran a funcionar o los desabilitaran
@@ -1827,6 +1827,7 @@ var AuthService = /** @class */ (function () {
                     usermessage = "Operacion no permitida";
                 }
                 Err.MensajeUsuario = usermessage;
+                reject(Err);
             });
         });
     };
@@ -2547,8 +2548,8 @@ var SigninComponent = /** @class */ (function () {
                 // }
                 // Registro.uid
             }).catch(function (Error) {
-                console.log(Error);
-                sweetalert__WEBPACK_IMPORTED_MODULE_8___default()('Error!', Error.MensajeUsuario);
+                console.log("Error de autentificacion", Error);
+                sweetalert__WEBPACK_IMPORTED_MODULE_8___default()('Error!', Error.MensajeUsuario, 'error');
             });
         }
         else if (form.value.password !== form.value.password2) {
